@@ -23,7 +23,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/clientes/{id}', [App\Http\Controllers\HomeController::class, 'read'])->name('read');
-Route::get('/clientes', [App\Http\Controllers\HomeController::class, 'deleteDependent'])->name('deleteDependent');
+Route::get('/dependente/{id}', [App\Http\Controllers\HomeController::class, 'deleteDependent'])->name('deleteDependent');
 Route::put('/clientes/{id}', [App\Http\Controllers\HomeController::class, 'update'])->name('update');
 Route::get('/cadastra-cliente/novo', [App\Http\Controllers\HomeController::class, 'createNew'])->name('createNew');
 Route::post('/cadastra-cliente/novo', [App\Http\Controllers\HomeController::class, 'createInsert'])->name('createInsert');

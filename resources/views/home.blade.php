@@ -32,9 +32,13 @@
                                 @endforeach
                             </td>
                             <td>
-                                <a class="action-icon" href="{{ route('read', ['id' => $cliente->id]) }}"><i
-                                        class="bi bi-eyeglasses"></i></a>
-                                <a href="{{ route('deleteClient', $cliente->id) }}"><i class="bi bi-trash3-fill"></i></a>
+
+                                <a class="action-icon" href="{{ route('read', ['id' => $cliente->id]) }}">
+                                  <button class="btn btn-info btn-sm">Detalhes</button>
+                                </a>
+                                <a href="{{ route('deleteClient', $cliente->id) }}">
+                                  <i class="bi bi-trash3-fill"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach

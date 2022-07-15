@@ -10,9 +10,9 @@
             <h1>Edita Cliente</h1>
 
             <form action="{{ route('update', $id) }}" method="post">
-              @csrf
-              @method('PUT')
-              {{-- <input type="text" id="id" name="id" value="{{$id}}" hidden> --}}
+                @csrf
+                @method('PUT')
+                {{-- <input type="text" id="id" name="id" value="{{$id}}" hidden> --}}
                 <div class="row">
                     <label class="col-md-2" for="inputNome">Nome</label>
                     <div class="col-md-10 form-group">
@@ -92,7 +92,7 @@
                         </select>
                     </div>
                 </div>
-                <button type="submit">Salvar</button>
+                <button class="btn btn-info" type="submit">Salvar</button>
             </form>
         </div>
     </div>

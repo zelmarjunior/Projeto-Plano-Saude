@@ -7,7 +7,7 @@ use App\Models\DependentesModel;
 use App\Models\PlanosModel;
 use App\Models\ParentModel;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Route;
+use App\Http\Controllers\URL;
 
 class HomeController extends Controller
 {
@@ -28,7 +28,7 @@ class HomeController extends Controller
    */
   public function index()
   {
-    $this->data['clients'] = ClientsModel::orderBy('id')->with('dependentes')->get();
+    $this->data['clients'] = ClientsModel::orderBy('nome')->with('dependentes')->get();
     $this->data['planos'] = PlanosModel::get();
 
     return view('home', $this->data);
@@ -52,6 +52,7 @@ class HomeController extends Controller
 
     return view('create', $this->data);
   }
+
   public function createInsert(Request $request)
   {
     /* dd($request->all()); */
@@ -77,17 +78,16 @@ class HomeController extends Controller
     return view('edit', $client, $this->data);
   }
 
-  public function createNewDependent($id) /* Recebendo o ID da tela EDIT */
+  public function createNewDependent($id)
   {
     $this->data['id'] = $id;
     $this->data['parentescos'] = ParentModel::get()->toArray();
-    /* dd($this->data); */
-    return view('createDependent', $this->data); /* Passando id pra view de Criar o dependente, para poder usar no createInsertDependent */
+
+    return view('createDependent', $this->data);
   }
 
   public function createInsertDependent(Request $request)
   {
-    /* dd($request->id); */
     DependentesModel::create([
       'nome' => $request->nomeDependente,
       'titular' => $request->id,
@@ -102,12 +102,11 @@ class HomeController extends Controller
     ClientsModel::findOrFail($id)->delete();
     return redirect('home');
   }
-  public function deleteDependent($id )
+  public function deleteDependent($id)
   {
 
-    dd($id);
     DependentesModel::findOrFail($id)->delete();
-    /* return redirect('details'); */
+    return back();
   }
 
   public function update(Request $request)
@@ -121,8 +120,3 @@ class HomeController extends Controller
     return redirect('home');
   }
 }
-
-
-/*
-
-*/

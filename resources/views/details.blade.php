@@ -93,13 +93,14 @@
                     </form>
 
                     <a href="{{ route('edit', $client['id']) }}">
-                        <button>Editar Cliente</button>
+                        <button class="btn btn-info">Editar Cliente</button>
                     </a>
                 </div>
                 <br><br>
                 <div class="form-dependent">
                     <h1>Dependentes</h1>
                     <table class="table">
+                        <th>ID</th>
                         <th>Nome</th>
                         <th>Parentesco</th>
                         <th>Action</th>
@@ -107,17 +108,17 @@
                         <tbody>
                             @foreach ($client['dependentes'] as $dependente)
                                 <tr>
+                                    <td>{{ $dependente['id'] }}</td>
                                     <td>{{ $dependente['nome'] }}</td>
-                                    <td>{{ $parentescos[$dependente['parentesco']]['descricao'] }}</td>
-                                    <td><a href="{{ route('deleteDependent') }}"><i
-                                                class="bi bi-trash3-fill"></i></a>{{$client['id']}}</td>
-                                </tr>{{-- /* $dependente['id']  */ --}}
+                                    <td>{{ $parentescos[$dependente['parentesco'] - 1]['descricao'] }}</td>
+                                    <td><a href="{{ route('deleteDependent', $dependente['id']) }}"><i
+                                                class="bi bi-trash3-fill"></i></a></td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    <input type="text" name="" id="" value="{{$client['id']}}">
                     <a href="{{ route('createNewDependent', $client['id']) }}">
-                        <button>Novo Dependente</button>
+                        <button class="btn btn-info">Novo Dependente</button>
                     </a>
 
                 </div>
