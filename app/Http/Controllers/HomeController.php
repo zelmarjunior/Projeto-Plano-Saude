@@ -16,6 +16,8 @@ class HomeController extends Controller
    *
    * @return void
    */
+  var $totalPages = 5;
+
   public function __construct()
   {
     $this->middleware('auth');
@@ -28,7 +30,7 @@ class HomeController extends Controller
    */
   public function index()
   {
-    $this->data['clients'] = ClientsModel::orderBy('nome')->with('dependentes')->get();
+    $this->data['clients'] = ClientsModel::orderBy('nome')->with('dependentes')->paginate($this->totalPages);
     $this->data['planos'] = PlanosModel::get();
 
     return view('home', $this->data);

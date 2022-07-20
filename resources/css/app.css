@@ -1,22 +1,30 @@
-.action-icon {
-	color: black;
+a:hover {
+  text-decoration: none;
 }
-h1 {
-  color: brown;
-}
-/* .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-} */
-.form-client {
 
+.button-new-client {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.title-home {
+  margin: 0 0 0 200px;
+}
+
+.home-actions {
+  height: 25px;
+}
+
+.btn-sm {
+  padding: 0 5px;
+}
+
+.form-client {
+  margin: 0 100px;
 }
 
 .form-dependent {
-
+  margin: 0 100px;
 }
 
-label {
-
-}
+label {}
