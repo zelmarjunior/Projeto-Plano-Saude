@@ -11,7 +11,7 @@
             <hr>
             <br>
 
-            <form action="{{ route('update', $id) }}" method="post">
+            <form action="{{ route('updateClient', $id) }}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="row">

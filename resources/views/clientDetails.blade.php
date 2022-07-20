@@ -7,6 +7,7 @@
                 <div class="form-client">
                     <h1>Cliente</h1>
                     <hr>
+                    <br>
                     <form action="" method="post">
                         <div class="row">
                             <div class="col-sm">
@@ -96,13 +97,15 @@
                         </div>
                     </form>
 
-                    <a href="{{ route('edit', $client['id']) }}">
+                    <a href="{{ route('editClient', $client['id']) }}">
                         <button class="btn btn-info">Editar Cliente</button>
                     </a>
                 </div>
                 <br><br>
                 <div class="form-dependent">
                     <h1>Dependentes</h1>
+                    <hr>
+                    <br>
                     <table class="table table-striped border">
                         {{-- <th>ID</th> --}}
                         <th>Nome</th>
@@ -121,11 +124,10 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <a href="{{ route('createNewDependent', $client['id']) }}">
+                    <a href="{{ route('createNewClientLoadDataDependent', $client['id']) }}">
                         <button class="btn btn-info">Novo Dependente</button>
                     </a>
 
                 </div>
-
     </div>
 @endsection

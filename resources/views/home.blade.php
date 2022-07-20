@@ -5,7 +5,7 @@
         <h2 class="title-home">Nossos Clientes</h2>
 
         <div class="col-8 m-auto">
-            <a class="button-new-client" href="{{ route('createNew') }}">
+            <a class="button-new-client" href="{{ route('createNewClientLoadData') }}">
                 <button type="button" class="btn btn-outline-success">
                     <i class="bi bi-clipboard2-plus-fill"></i> Novo Cliente
                 </button>
@@ -32,7 +32,7 @@
                             </td>
                             <td>
 
-                                <a class="action-icon" href="{{ route('read', ['id' => $cliente->id]) }}">
+                                <a class="action-icon" href="{{ route('readAllDataClients', ['id' => $cliente->id]) }}">
                                     <button class="btn btn-info btn-sm home-actions">Detalhes</button>
                                 </a>
                                 <a href="{{ route('deleteClient', $cliente->id) }}">

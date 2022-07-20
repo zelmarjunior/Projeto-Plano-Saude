@@ -7,7 +7,6 @@ use App\Models\DependentesModel;
 use App\Models\PlanosModel;
 use App\Models\ParentModel;
 use Illuminate\Http\Request;
-use App\Http\Controllers\URL;
 
 class HomeController extends Controller
 {
@@ -16,7 +15,7 @@ class HomeController extends Controller
    *
    * @return void
    */
-  var $totalPages = 5;
+  var $totalPerPage = 6;
 
   public function __construct()
   {
@@ -28,36 +27,30 @@ class HomeController extends Controller
    *
    * @return \Illuminate\Contracts\Support\Renderable
    */
+
   public function index()
   {
-    $this->data['clients'] = ClientsModel::orderBy('nome')->with('dependentes')->paginate($this->totalPages);
+    $this->data['clients'] = ClientsModel::orderBy('nome')->with('dependentes')->paginate($this->totalPerPage);
     $this->data['planos'] = PlanosModel::get();
-
     return view('home', $this->data);
   }
 
-  public function read($id)
+  public function readAllDataClients($id)
   {
-    if ($id) {
-      $this->data['client'] = ClientsModel::where('id', $id)->with('dependentes')->first()->toArray();
-    }
-
+    $this->data['client'] = ClientsModel::where('id', $id)->with('dependentes')->first()->toArray();
     $this->data['parentescos'] = ParentModel::get()->toArray();
     $this->data['planos'] = PlanosModel::get()->toArray();
-    /* dd($this->data); */
-    return view('details', $this->data);
+    return view('clientDetails', $this->data);
   }
 
-  public function createNew()
+  public function createNewClientLoadData()
   {
     $this->data['planos'] = PlanosModel::get()->toArray();
-
-    return view('create', $this->data);
+    return view('createClient', $this->data);
   }
 
-  public function createInsert(Request $request)
+  public function createNewClientInsertData(Request $request)
   {
-    /* dd($request->all()); */
     ClientsModel::create(
       [
         'nome' => $request->nome,
@@ -71,16 +64,19 @@ class HomeController extends Controller
         'tipo_plano' => $request->plano,
       ]
     );
+
     return redirect('home');
   }
-  public function edit($id)
+
+  public function editClient($id)
   {
     $client = ClientsModel::where('id', $id)->with('dependentes')->first()->toArray();
     $this->data['planos'] = PlanosModel::get()->toArray();
-    return view('edit', $client, $this->data);
+
+    return view('editClient', $client, $this->data);
   }
 
-  public function createNewDependent($id)
+  public function createNewClientLoadDataDependent($id)
   {
     $this->data['id'] = $id;
     $this->data['parentescos'] = ParentModel::get()->toArray();
@@ -88,7 +84,7 @@ class HomeController extends Controller
     return view('createDependent', $this->data);
   }
 
-  public function createInsertDependent(Request $request)
+  public function createNewClientInsertDataDependent(Request $request)
   {
     DependentesModel::create([
       'nome' => $request->nomeDependente,
@@ -96,7 +92,7 @@ class HomeController extends Controller
       'parentesco' => $request->parentesco + 1,
     ]);
 
-    return redirect()->route('read', [$request->id]);
+    return redirect()->route('readAllDataClients', [$request->id]);
   }
 
   public function deleteClient($id)
@@ -104,20 +100,19 @@ class HomeController extends Controller
     ClientsModel::findOrFail($id)->delete();
     return redirect('home');
   }
+
   public function deleteDependent($id)
   {
-
     DependentesModel::findOrFail($id)->delete();
     return back();
   }
 
-  public function update(Request $request)
+  public function updateClient(Request $request)
   {
     $id = $request->segment(2);
     $request->request->remove('_token');
     $request->request->remove('_method');
     ClientsModel::where("id", $id)->update($request->all());
-
 
     return redirect('home');
   }

@@ -22,14 +22,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/clientes/{id}', [App\Http\Controllers\HomeController::class, 'read'])->name('read');
-Route::get('/dependente/{id}', [App\Http\Controllers\HomeController::class, 'deleteDependent'])->name('deleteDependent');
-Route::put('/clientes/{id}', [App\Http\Controllers\HomeController::class, 'update'])->name('update');
-Route::get('/cadastra-cliente/novo', [App\Http\Controllers\HomeController::class, 'createNew'])->name('createNew');
-Route::post('/cadastra-cliente/novo', [App\Http\Controllers\HomeController::class, 'createInsert'])->name('createInsert');
-Route::get('/cadastra-cliente/editar/{id}', [App\Http\Controllers\HomeController::class, 'edit'])->name('edit');
-Route::get('/cadastra-cliente/novo-dependente/{id}', [App\Http\Controllers\HomeController::class, 'createNewDependent'])->name('createNewDependent');
-Route::post('/cadastra-cliente/novo-dependente', [App\Http\Controllers\HomeController::class, 'createInsertDependent'])->name('createInsertDependent');
+Route::get('/clientes/{id}', [App\Http\Controllers\HomeController::class, 'readAllDataClients'])->name('readAllDataClients');
+Route::put('/clientes/{id}', [App\Http\Controllers\HomeController::class, 'updateClient'])->name('updateClient');
+Route::get('/cadastra-cliente/novo', [App\Http\Controllers\HomeController::class, 'createNewClientLoadData'])->name('createNewClientLoadData');
+Route::post('/cadastra-cliente/novo', [App\Http\Controllers\HomeController::class, 'createNewClientInsertData'])->name('createNewClientInsertData');
+Route::get('/cadastra-cliente/editar/{id}', [App\Http\Controllers\HomeController::class, 'editClient'])->name('editClient');
+Route::get('/cadastra-cliente/novo-dependente/{id}', [App\Http\Controllers\HomeController::class, 'createNewClientLoadDataDependent'])->name('createNewClientLoadDataDependent');
+Route::post('/cadastra-cliente/novo-dependente', [App\Http\Controllers\HomeController::class, 'createNewClientInsertDataDependent'])->name('createNewClientInsertDataDependent');
 Route::get('/home/{id}', [App\Http\Controllers\HomeController::class, 'deleteClient'])->name('deleteClient');
-
-Route::resource('teste', TesteControler::class);
+Route::get('/dependente/{id}', [App\Http\Controllers\HomeController::class, 'deleteDependent'])->name('deleteDependent');

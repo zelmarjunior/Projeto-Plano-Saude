@@ -8,7 +8,7 @@
             <-- Voltar </a>
                 <br>
                 <div class="form-client">
-                    <form class="" action="{{ route('createInsert') }}" method="post">
+                    <form class="" action="{{ route('createNewClientInsertData') }}" method="post">
                         {{ csrf_field() }}
 
                         <div class="row">
